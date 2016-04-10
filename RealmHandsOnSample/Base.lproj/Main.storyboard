@@ -57,7 +57,7 @@
                             <constraint firstAttribute="trailing" secondItem="lVg-4K-KTi" secondAttribute="trailing" id="bfL-8c-oX1"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" id="GIb-dm-snX"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="icon_favorites" id="GIb-dm-snX"/>
                     <connections>
                         <outlet property="favoritesTableView" destination="lVg-4K-KTi" id="Z5e-gF-pBk"/>
                     </connections>
@@ -101,7 +101,7 @@
                             <constraint firstItem="nTX-gA-bwB" firstAttribute="top" secondItem="CYU-Mb-uwa" secondAttribute="bottom" constant="-64" id="cW6-Nm-ak4"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="TimeLine" id="egp-pX-5KL"/>
+                    <tabBarItem key="tabBarItem" title="TimeLine" image="icon_timeline" id="egp-pX-5KL"/>
                     <connections>
                         <outlet property="timeLineTableView" destination="nTX-gA-bwB" id="H2D-ez-NRz"/>
                     </connections>
@@ -130,4 +130,8 @@
             <point key="canvasLocation" x="279" y="240"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="icon_favorites" width="30" height="30"/>
+        <image name="icon_timeline" width="30" height="30"/>
+    </resources>
 </document>
