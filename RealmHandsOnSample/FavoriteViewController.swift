@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  FavoriteViewController.swift
 //  RealmHandsOnSample
 //
 //  Created by 麻生 拓弥 on 2016/04/10.
@@ -8,18 +8,28 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FavoriteViewController: UIViewController {
+
+
+    @IBOutlet weak var favoritesTableView: UITableView!
+
+    // MARK:- Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
     }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+
+        self.tabBarController?.navigationItem.title = "Favorite Tweet"
+    }
+
+    // MARK:- Memory Warning
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-

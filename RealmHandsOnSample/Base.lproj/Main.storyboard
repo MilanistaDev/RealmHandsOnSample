@@ -12,6 +12,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="hnq-sN-3CI">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.082352941176470587" green="0.62352941176470589" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="0kh-Jx-qyu" kind="relationship" relationship="rootViewController" id="c1f-Nf-OOp"/>
@@ -24,7 +25,7 @@
         <!--Favorites-->
         <scene sceneID="P3t-UB-H8l">
             <objects>
-                <viewController id="PmO-EX-0xy" sceneMemberID="viewController">
+                <viewController id="PmO-EX-0xy" customClass="FavoriteViewController" customModule="RealmHandsOnSample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DBe-KG-F21"/>
                         <viewControllerLayoutGuide type="bottom" id="I7i-wT-27o"/>
@@ -57,6 +58,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Favorites" id="GIb-dm-snX"/>
+                    <connections>
+                        <outlet property="favoritesTableView" destination="lVg-4K-KTi" id="Z5e-gF-pBk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Q4h-Q0-O6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -65,7 +69,7 @@
         <!--TimeLine-->
         <scene sceneID="zOa-pV-9fv">
             <objects>
-                <viewController id="7Dh-mx-xaI" sceneMemberID="viewController">
+                <viewController id="7Dh-mx-xaI" customClass="TimeLineViewController" customModule="RealmHandsOnSample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CYU-Mb-uwa"/>
                         <viewControllerLayoutGuide type="bottom" id="Xgp-Tj-IqU"/>
@@ -98,6 +102,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="TimeLine" id="egp-pX-5KL"/>
+                    <connections>
+                        <outlet property="timeLineTableView" destination="nTX-gA-bwB" id="H2D-ez-NRz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4D-2C-yI3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
