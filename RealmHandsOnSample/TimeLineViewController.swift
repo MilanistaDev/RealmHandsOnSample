@@ -50,7 +50,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("timeLineCell", forIndexPath: indexPath) as! TimeLineCell
 
         cell.useNameLabel.text = "UserName"
-        cell.tweetTextView.text = "Test\nTest\nTest\nTest\n"
+        cell.tweetTextView.text = "Test"
         cell.userIconImageView.image = UIImage(named: "icon_timeline")
 
         return cell

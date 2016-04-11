@@ -50,7 +50,7 @@ class FavoriteViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("favoriteCell", forIndexPath: indexPath) as! FavoriteCell
 
         cell.userNameLabel.text = "UserName"
-        cell.tweetTextView.text = "Test\nTest\nTest\nTest\n"
+        cell.tweetTextView.text = "Test"
         cell.userIconImageView.image = UIImage(named: "icon_favorites")
 
         return cell
