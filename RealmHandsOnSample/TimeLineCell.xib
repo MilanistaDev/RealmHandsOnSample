@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="timeLineCell" rowHeight="90" id="KGk-i7-Jjw" customClass="TimeLineCell" customModule="RealmHandsOnSample" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="89.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cya-4n-g5a">
+                        <rect key="frame" x="8" y="8" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="172-wd-i8K"/>
+                            <constraint firstAttribute="width" constant="50" id="480-ZW-alU"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pc8-7x-Ck6">
+                        <rect key="frame" x="66" y="8" width="246" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GPI-Ta-U1B">
+                        <rect key="frame" x="66" y="37" width="246" height="44.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <dataDetectorType key="dataDetectorTypes" link="YES"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="GPI-Ta-U1B" firstAttribute="top" secondItem="Pc8-7x-Ck6" secondAttribute="bottom" constant="8" id="84v-2I-LLo"/>
+                    <constraint firstItem="Cya-4n-g5a" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="HBo-Aa-ckF"/>
+                    <constraint firstItem="Cya-4n-g5a" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="HtA-FZ-MjQ"/>
+                    <constraint firstItem="GPI-Ta-U1B" firstAttribute="leading" secondItem="Cya-4n-g5a" secondAttribute="trailing" constant="8" id="OW3-fx-4cn"/>
+                    <constraint firstAttribute="trailing" secondItem="Pc8-7x-Ck6" secondAttribute="trailing" constant="8" id="QTL-8v-1Pc"/>
+                    <constraint firstItem="Pc8-7x-Ck6" firstAttribute="leading" secondItem="Cya-4n-g5a" secondAttribute="trailing" constant="8" id="TfZ-O4-rX2"/>
+                    <constraint firstItem="Pc8-7x-Ck6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="euZ-kK-tt4"/>
+                    <constraint firstAttribute="bottom" secondItem="GPI-Ta-U1B" secondAttribute="bottom" constant="8" id="hnY-lb-Ltc"/>
+                    <constraint firstAttribute="bottom" secondItem="GPI-Ta-U1B" secondAttribute="bottom" constant="8" id="pgd-hH-n6Q"/>
+                    <constraint firstAttribute="trailing" secondItem="GPI-Ta-U1B" secondAttribute="trailing" constant="8" id="ycV-2x-XgY"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="hnY-lb-Ltc"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="tweetTextView" destination="GPI-Ta-U1B" id="k1d-XJ-hU1"/>
+                <outlet property="useNameLabel" destination="Pc8-7x-Ck6" id="Ovo-gO-HyT"/>
+                <outlet property="userIconImageView" destination="Cya-4n-g5a" id="Rsn-tH-yWA"/>
+            </connections>
+            <point key="canvasLocation" x="-99" y="293"/>
+        </tableViewCell>
+    </objects>
+</document>
