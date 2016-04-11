@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Accounts
+import Social
 
 class TimeLineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-
     @IBOutlet weak var timeLineTableView: UITableView!
+
+    var account: ACAccount?
+    var timeLine = [[String:AnyObject]]()
 
     // MARK:- Life Cycle
 
@@ -25,12 +29,50 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         self.timeLineTableView.registerNib(UINib(nibName: "TimeLineCell", bundle: nil), forCellReuseIdentifier: "timeLineCell")
         self.timeLineTableView.rowHeight = UITableViewAutomaticDimension
         self.timeLineTableView.estimatedRowHeight = 90
+
+        // Twitter の認証系
+        // インスタンス生成
+        let accountStore = ACAccountStore()
+        let accountType = accountStore.accountTypeWithAccountTypeIdentifier(ACAccountTypeIdentifierTwitter)
+        accountStore.requestAccessToAccountsWithType(accountType, options: nil) { (granted, error) -> Void in
+            if granted {
+                let accounts = accountStore.accountsWithAccountType(accountType)
+                if let account = accounts.first as? ACAccount {
+                        self.account = account
+                        self.getHomeTimeLine()
+                } else {
+
+                }
+            } else {
+
+            }
+        }
     }
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
 
         self.tabBarController?.navigationItem.title = "TimeLine"
+    }
+
+    // MARK:- Private Method
+
+    /*
+     内部の更新
+    */
+    func getHomeTimeLine() {
+        // リクエストするURL
+        let requestURL = NSURL(string: "https://api.twitter.com/1/statuses/home_timeline.json")
+        // リクエストを作成
+        let request = SLRequest(forServiceType: SLServiceTypeTwitter, requestMethod: .GET, URL: requestURL, parameters: nil)
+        request.account = account
+        request.performRequestWithHandler { (data, response, error) -> Void in
+            let results = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
+            self.timeLine = results as! [[String: AnyObject]]
+            dispatch_async(dispatch_get_main_queue()) {
+                self.timeLineTableView.reloadData()
+            }
+        }
     }
 
     // MARK: - TableView DataSource
@@ -42,16 +84,31 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return 1
+        return self.timeLine.count
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("timeLineCell", forIndexPath: indexPath) as! TimeLineCell
 
-        cell.useNameLabel.text = "UserName"
-        cell.tweetTextView.text = "Test"
-        cell.userIconImageView.image = UIImage(named: "icon_timeline")
+        let tweet = timeLine[indexPath.row]
+        let user = tweet["user"] as! [String: AnyObject]
+        cell.useNameLabel.text = user["name"]! as? String
+        cell.tweetTextView.text = tweet["text"] as! String
+
+        let urlStr: String = user["profile_image_url"] as! String
+
+        do {
+            // アイコン画像の URL 指定
+            let url: NSURL = NSURL(string: urlStr)!
+            // NSData として取得
+            let imageData: NSData = try NSData(contentsOfURL: url,
+                                                     options: NSDataReadingOptions.DataReadingMappedIfSafe)
+            // 取得した NSData を UIImage に変換
+            cell.userIconImageView.image = UIImage(data: imageData)
+        } catch {
+            print("Exception")
+        }
 
         return cell
     }
