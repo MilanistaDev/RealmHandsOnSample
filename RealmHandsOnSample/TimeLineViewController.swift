@@ -15,7 +15,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var timeLineTableView: UITableView!
 
     var account: ACAccount?
-    var timeLine = [[String:AnyObject]]()
+    var timeLine = [TweetModel]()
 
     // MARK:- Life Cycle
 
@@ -68,7 +68,10 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         request.account = account
         request.performRequestWithHandler { (data, response, error) -> Void in
             let results = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
-            self.timeLine = results as! [[String: AnyObject]]
+            let tweet = results as! [[String: AnyObject]]
+            self.timeLine = tweet.map {
+                return TweetModel(tweetDictionary: $0)
+            }
             dispatch_async(dispatch_get_main_queue()) {
                 self.timeLineTableView.reloadData()
             }
@@ -92,11 +95,10 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("timeLineCell", forIndexPath: indexPath) as! TimeLineCell
 
         let tweet = timeLine[indexPath.row]
-        let user = tweet["user"] as! [String: AnyObject]
-        cell.useNameLabel.text = user["name"]! as? String
-        cell.tweetTextView.text = tweet["text"] as! String
 
-        let urlStr: String = user["profile_image_url"] as! String
+        cell.useNameLabel.text = tweet.name
+        cell.tweetTextView.text = tweet.text
+        let urlStr: String = tweet.iconURL
 
         do {
             // アイコン画像の URL 指定
