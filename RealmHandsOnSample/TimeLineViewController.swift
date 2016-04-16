@@ -58,7 +58,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK:- Private Method
 
     /*
-     内部の更新
+     Twitter API を叩いてツイートを取得
     */
     func getHomeTimeLine() {
         // リクエストするURL
@@ -69,6 +69,8 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         request.performRequestWithHandler { (data, response, error) -> Void in
             let results = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
             let tweet = results as! [[String: AnyObject]]
+            // timeLine に使用する情報を格納する
+            // TweetModel の convenience init で 取得した数の分のツイート情報(name, iconURL, text)が入る
             self.timeLine = tweet.map {
                 return TweetModel(tweetDictionary: $0)
             }
@@ -87,14 +89,15 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return self.timeLine.count
+        return self.timeLine.count ?? 0
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("timeLineCell", forIndexPath: indexPath) as! TimeLineCell
 
-        let tweet = timeLine[indexPath.row]
+        // timeLine の indexPath.row に対応する値軍をモデルに展開
+        let tweet: TweetModel = timeLine[indexPath.row]
 
         cell.useNameLabel.text = tweet.name
         cell.tweetTextView.text = tweet.text
