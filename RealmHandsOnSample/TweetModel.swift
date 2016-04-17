@@ -15,6 +15,8 @@ class TweetModel: RealmSwift.Object {
     dynamic var name = ""
     dynamic var text = ""
     dynamic var iconURL = ""
+    // Tweetの重複を防ぐためのID(IDだとバッティングしない)
+    dynamic var tweetId = ""
 
     convenience init(tweetDictionary: [String: AnyObject]) {
         self.init()
@@ -24,5 +26,10 @@ class TweetModel: RealmSwift.Object {
         self.name = user["name"]! as! String
         self.iconURL = user["profile_image_url"] as! String
         self.text = tweetDictionary["text"] as! String
+        self.tweetId = tweetDictionary["id_str"] as! String
+    }
+
+    override class func primaryKey() -> String? {
+        return "tweetId"
     }
 }

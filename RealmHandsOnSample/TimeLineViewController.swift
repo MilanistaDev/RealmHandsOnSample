@@ -92,8 +92,8 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
             try! realm.write({() -> Void in
                 tweet.forEach {
                     let tweetInfo = TweetModel(tweetDictionary: $0)
-                    // オブジェクトを追加
-                    realm.add(tweetInfo)
+                    // オブジェクトを追加，バッティングした場合マージ
+                    realm.add(tweetInfo, update: true)
                 }
             })
             dispatch_async(dispatch_get_main_queue()) {
