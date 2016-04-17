@@ -9,13 +9,18 @@
 import UIKit
 import Accounts
 import Social
+import RealmSwift
 
 class TimeLineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var timeLineTableView: UITableView!
 
     var account: ACAccount?
-    var timeLine = [TweetModel]()
+
+    // Realmの結果を使うように書き換え
+    var timeLine: Results<TweetModel>?
+    // Realm用の通知トークン
+    var notificationToken: NotificationToken?
 
     // MARK:- Life Cycle
 
@@ -29,6 +34,16 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         self.timeLineTableView.registerNib(UINib(nibName: "TimeLineCell", bundle: nil), forCellReuseIdentifier: "timeLineCell")
         self.timeLineTableView.rowHeight = UITableViewAutomaticDimension
         self.timeLineTableView.estimatedRowHeight = 90
+
+        // インスタンス生成
+        let realm = try! Realm()
+        self.timeLine = realm.objects(TweetModel)
+
+        // timeLine(オブジェクト)に変化があれば通知され実行される
+        self.notificationToken = timeLine?.addNotificationBlock({ (Results, Error) -> () in
+            // 更新するものはここに書く
+            self.timeLineTableView.reloadData()
+        })
 
         // Twitter の認証系
         // インスタンス生成
@@ -69,11 +84,18 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         request.performRequestWithHandler { (data, response, error) -> Void in
             let results = try! NSJSONSerialization.JSONObjectWithData(data, options: [])
             let tweet = results as! [[String: AnyObject]]
-            // timeLine に使用する情報を格納する
-            // TweetModel の convenience init で 取得した数の分のツイート情報(name, iconURL, text)が入る
-            self.timeLine = tweet.map {
-                return TweetModel(tweetDictionary: $0)
-            }
+
+            // インスタンス生成
+            let realm = try! Realm()
+
+            // Realm に書き込み
+            try! realm.write({() -> Void in
+                tweet.forEach {
+                    let tweetInfo = TweetModel(tweetDictionary: $0)
+                    // オブジェクトを追加
+                    realm.add(tweetInfo)
+                }
+            })
             dispatch_async(dispatch_get_main_queue()) {
                 self.timeLineTableView.reloadData()
             }
@@ -89,7 +111,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return self.timeLine.count ?? 0
+        return self.timeLine?.count ?? 0
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -97,7 +119,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("timeLineCell", forIndexPath: indexPath) as! TimeLineCell
 
         // timeLine の indexPath.row に対応する値軍をモデルに展開
-        let tweet: TweetModel = timeLine[indexPath.row]
+        let tweet: TweetModel = timeLine![indexPath.row]
 
         cell.useNameLabel.text = tweet.name
         cell.tweetTextView.text = tweet.text

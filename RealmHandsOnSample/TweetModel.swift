@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import RealmSwift
 
-class TweetModel: NSObject {
+class TweetModel: RealmSwift.Object {
 
-    // プロパティ
-    var name = ""
-    var text = ""
-    var iconURL = ""
+    // プロパティ(KVOの監視対象になるプロパティにはdynamicをつける)
+    dynamic var name = ""
+    dynamic var text = ""
+    dynamic var iconURL = ""
 
     convenience init(tweetDictionary: [String: AnyObject]) {
         self.init()
