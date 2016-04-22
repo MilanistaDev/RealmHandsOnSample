@@ -17,6 +17,8 @@ class TweetModel: RealmSwift.Object {
     dynamic var iconURL = ""
     // Tweetの重複を防ぐためのID(IDだとバッティングしない)
     dynamic var tweetId = ""
+    // お気に入り用プロパティ(Bool)
+    dynamic var favorited = false
 
     convenience init(tweetDictionary: [String: AnyObject]) {
         self.init()
