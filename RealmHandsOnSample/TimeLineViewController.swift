@@ -40,7 +40,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         self.timeLine = realm.objects(TweetModel)
 
         // timeLine(オブジェクト)に変化があれば通知され実行される
-        self.notificationToken = timeLine?.addNotificationBlock({ (Results, Error) -> () in
+        self.notificationToken = self.timeLine?.addNotificationBlock({ (Results, Error) -> () in
             // 更新するものはここに書く
             self.timeLineTableView.reloadData()
         })
@@ -119,7 +119,7 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCellWithIdentifier("timeLineCell", forIndexPath: indexPath) as! TimeLineCell
 
         // timeLine の indexPath.row に対応する値軍をモデルに展開
-        let tweet: TweetModel = timeLine![indexPath.row]
+        let tweet: TweetModel = self.timeLine![indexPath.row]
 
         cell.useNameLabel.text = tweet.name
         cell.tweetTextView.text = tweet.text
@@ -144,7 +144,18 @@ class TimeLineViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
+        let tweet = self.timeLine![indexPath.row]
 
+        // インスタンス生成
+        let realm = try! Realm()
+
+        // セルをタップするとお気に入りにする
+        // もう一度タップすると気に入り解除
+        // realm に書き込む
+        try! realm.write { () -> Void in
+            // お気に入りかそうでないか
+            tweet.favorited = !tweet.favorited
+        }
     }
 
     // MARK:- Memory Warning
