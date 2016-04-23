@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FD1A78B91CCBAD7C00E6D187 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FD1A78B81CCBAD7C00E6D187 /* LaunchScreen.storyboard */; };
 		FDB006BB1CBA8F8800490140 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB006BA1CBA8F8800490140 /* AppDelegate.swift */; };
 		FDB006C01CBA8F8800490140 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB006BE1CBA8F8800490140 /* Main.storyboard */; };
 		FDB006C21CBA8F8800490140 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDB006C11CBA8F8800490140 /* Assets.xcassets */; };
+		FDB006C51CBA8F8800490140 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB006C31CBA8F8800490140 /* LaunchScreen.storyboard */; };
 		FDB006CD1CBA935800490140 /* TimeLineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB006CC1CBA935800490140 /* TimeLineViewController.swift */; };
 		FDB006CF1CBA938800490140 /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB006CE1CBA938800490140 /* FavoriteViewController.swift */; };
 		FDB006D21CBBC02200490140 /* TimeLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB006D01CBBC02200490140 /* TimeLineCell.swift */; };
@@ -20,11 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		FD1A78B81CCBAD7C00E6D187 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDB006B71CBA8F8800490140 /* RealmHandsOnSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealmHandsOnSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB006BA1CBA8F8800490140 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDB006BF1CBA8F8800490140 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDB006C11CBA8F8800490140 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FDB006C41CBA8F8800490140 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDB006C61CBA8F8800490140 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDB006CC1CBA935800490140 /* TimeLineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeLineViewController.swift; sourceTree = "<group>"; };
 		FDB006CE1CBA938800490140 /* FavoriteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteViewController.swift; sourceTree = "<group>"; };
@@ -72,8 +72,8 @@
 				FDB006D41CBBC03E00490140 /* FavoriteCell.swift */,
 				FDB006D51CBBC03E00490140 /* FavoriteCell.xib */,
 				FDB006BE1CBA8F8800490140 /* Main.storyboard */,
-				FD1A78B81CCBAD7C00E6D187 /* LaunchScreen.storyboard */,
 				FDB006C11CBA8F8800490140 /* Assets.xcassets */,
+				FDB006C31CBA8F8800490140 /* LaunchScreen.storyboard */,
 				FDB006C61CBA8F8800490140 /* Info.plist */,
 			);
 			path = RealmHandsOnSample;
@@ -138,9 +138,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDB006D31CBBC02200490140 /* TimeLineCell.xib in Resources */,
+				FDB006C51CBA8F8800490140 /* LaunchScreen.storyboard in Resources */,
 				FDB006C21CBA8F8800490140 /* Assets.xcassets in Resources */,
 				FDB006C01CBA8F8800490140 /* Main.storyboard in Resources */,
-				FD1A78B91CCBAD7C00E6D187 /* LaunchScreen.storyboard in Resources */,
 				FDB006D71CBBC03E00490140 /* FavoriteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -169,6 +169,14 @@
 				FDB006BF1CBA8F8800490140 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FDB006C31CBA8F8800490140 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FDB006C41CBA8F8800490140 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -268,7 +276,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.RealmHandsOnSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -281,7 +288,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ASTK.RealmHandsOnSample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -304,7 +310,6 @@
 				FDB006CB1CBA8F8800490140 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
